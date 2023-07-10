@@ -427,19 +427,21 @@ void show(struct log logs[]){
 
 void showPuzzle(struct log logs[]){
     int i = 0;
-    char field[10][10];
+    const int h = 6;
+    const int w = 8;
+    char field[h][8];
     int n = 10;
-    for (int j = 0; j < n; j++){
-        for (int k = 0; k < n; k++){
+    for(int j = 0; j < h; j++){
+        for(int k = 0; k < w; k++){
             field[j][k] = '\0';
         }
     }
     while(i < 9){
         struct log l = logs[i];
         uint8_t* p = parts[i]->p[l.i];
-        for (int j = 0; j < 8; j++){
-            for (int k = 0; k < 8; k++){
-                if (p[k] & (0x80 >> j)){
+        for(int j = 0; j < 8; j++){
+            for(int k = 0; k < 8; k++){
+                if(p[k] & (0x80 >> j)){
                     //field[l.y + k][l.x + j] = '0' + i;
                     field[l.y + k][l.x + j] = l.c;
                 }
@@ -447,7 +449,7 @@ void showPuzzle(struct log logs[]){
         }
         ++i;
     }
-    for (int j = 0; j < n; j++){
+    for(int j = 0; j < h; j++){
         printf("%s\n", field[j]);
     }
 }
@@ -552,9 +554,9 @@ int main(){
     int i = 0;
     while(answers[i].l[0].c){
         printf("ans: %d\n", i);
-        show(answers[i].l);
-        printf("\n");
+        //show(answers[i].l);
         showPuzzle(answers[i].l);
+        printf("\n");
         ++i;
     }
 
