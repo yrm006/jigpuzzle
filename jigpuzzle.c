@@ -504,9 +504,7 @@ int down(uint8_t p[]){
     return 1;
 }
 
-int put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
-    int r = 0;
-
+void put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
     if(parts[pi]){
         logs[pi].c = parts[pi]->c;
 
@@ -521,8 +519,7 @@ int put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
                 logs[pi].x = 0;
                 do{
                     if( (~b | p2) == ~b ){
-                        if( put(b|p2, pi+1, logs, answers) ){
-                        }
+                        put(b|p2, pi+1, logs, answers);
                     }else{
                         // none
                     }
@@ -534,10 +531,7 @@ int put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
         }
     }else{
         push(answers, logs);
-        r = 1;
     }
-
-    return r;
 }
 
 
