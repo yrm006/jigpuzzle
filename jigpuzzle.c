@@ -518,10 +518,10 @@ void put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
                 uint64_t p2 = p;
                 logs[pi].x = 0;
                 do{
-                    if( (~b | p2) == ~b ){
-                        put(b|p2, pi+1, logs, answers);
+                    if( b&p2 ){
+                        // can't put
                     }else{
-                        // none
+                        put(b|p2, pi+1, logs, answers);
                     }
                     ++logs[pi].x;
                 }while( right((uint8_t*)&p2) );
