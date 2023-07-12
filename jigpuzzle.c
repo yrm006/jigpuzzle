@@ -512,21 +512,21 @@ void put(uint64_t b, int pi, struct log logs[], struct answer answers[]){
         while( parts[pi]->p[i] ){
             logs[pi].i = i;
 
-            uint64_t p = *(uint64_t*)parts[pi]->p[i];
+            uint64_t p_ = *(uint64_t*)parts[pi]->p[i];
             logs[pi].y = 0;
             do{
-                uint64_t p2 = p;
+                uint64_t p = p_;
                 logs[pi].x = 0;
                 do{
-                    if( b&p2 ){
+                    if( b&p ){
                         // can't put
                     }else{
-                        put(b|p2, pi+1, logs, answers);
+                        put(b|p, pi+1, logs, answers);
                     }
                     ++logs[pi].x;
-                }while( right((uint8_t*)&p2) );
+                }while( right((uint8_t*)&p) );
                 ++logs[pi].y;
-            }while( down((uint8_t*)&p) );
+            }while( down((uint8_t*)&p_) );
             ++i;
         }
     }else{
